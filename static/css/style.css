@@ -1,0 +1,23 @@
+.bottom-line {
+    margin-top: 50px;
+}
+
+.admin {
+    font-weight: 600;
+    color: black;
+}
+
+header.about {
+    background: url(/static/img/about-bg.jpg) no-repeat; 
+    background-size: cover;
+}
+
+header.dashboard {
+    background: url(/static/img/home-bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+header.edit {
+    background: url(/static/img/home-bg.jpg) no-repeat;
+    background-size: cover;
+}

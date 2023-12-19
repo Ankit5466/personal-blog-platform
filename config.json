@@ -1,0 +1,14 @@
+{
+  "params":
+  {
+   "local_server":"True",
+   "local_uri": "mysql://root:@localhost/blog_web",
+   "prod_uri": "mysql://root:@localhost/blog_web",
+   "about_text": "Hello, My name is Ankit Sharma. I'm Fullstack Developer",
+   "blog_name": "Techno blogging",
+   "no_of_posts": 2,
+   "admin_user": "ankit",
+   "admin_password": "ankit"
+  }
+
+}
