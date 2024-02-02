@@ -30,24 +30,22 @@ class Posts(db.Model):
 
 @app.route("/")
 def index():
-    posts = Posts.query.filter_by().all()
-    last = math.ceil(len(posts)/int(params['no_of_posts']))
-    page = request.args.get('page')
-    if(not str(page).isnumeric()):
+    posts = Posts.query.all()
+    total_posts = len(posts)
+    page = request.args.get('page', default=1, type=int)
+    if page < 1:
         page = 1
-    page = int(page)
-    posts = posts[(page-1)*int(params['no_of_posts']): (page-1)*int(params['no_of_posts'])+ int(params['no_of_posts'])]
-    #pagination logic
-    #first page
-    if (page==1):
-        old = "#"
-        new = "/?page=" + str(page+1)
-    elif(page==last):
-        old = "/?page=" + str(page-1)
-        new = "#"
-    else:
-        old = "/?page=" + str(page-1)
-        new = "/?page=" + str(page+1)
+    if total_posts == 0 or params['no_of_posts'] == 0:
+        # Handle the case where there are no posts or no posts per page
+        return render_template('index.html', params=params, posts=[], old="#", new="#")
+    last = math.ceil(total_posts / params['no_of_posts'])
+    if page > last:
+        page = last
+    start_index = (page - 1) * params['no_of_posts']
+    end_index = min(start_index + params['no_of_posts'], total_posts)
+    posts = posts[start_index:end_index]
+    old = "#" if page == 1 else "/?page=" + str(page - 1)
+    new = "#" if page == last else "/?page=" + str(page + 1)
 
     return render_template('index.html', params=params, posts=posts, old=old, new=new)
 
